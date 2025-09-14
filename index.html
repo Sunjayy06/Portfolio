@@ -56,21 +56,28 @@
             50% { opacity: 1; }
         }
 
-      .profile-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 5px solid rgba(255, 255, 255, 0.3);
-    margin: 0 auto 1rem;
-    background: linear-gradient(45deg, #f39c12, #e74c3c);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    color: white;
-    position: relative;
-    z-index: 2;
-}
+    .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            object-fit:contain;
+            overflow: hidden; 
+        }
+
+        .profile-img img {
+            width: 150%;
+            height: 150%;
+            object-fit: cover; 
+            border-radius: 50%; 
+            display: block;
+        }
         h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
@@ -408,7 +415,7 @@
     <div class="container">
         <header>
             <div class="profile-img">
-    <img src="your-photo.jpg" alt="Sunjay" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+    <img src="sun.jpg" alt="Sunjay" >
 </div>
             <h1>Sunjayy Madev P</h1>
             <p class="subtitle">Student | DL Enthusiast</p>
