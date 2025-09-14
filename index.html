@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - E-Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a"><stop offset="20%" stop-color="%23fff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23fff" stop-opacity="0"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>') repeat;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        nav {
+            background: #34495e;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0 1rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        section:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+
+        section:nth-child(odd) {
+            animation-delay: 0.1s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 0.5rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid #3498db;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: scale(1.05);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #3498db, #e74c3c);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #3498db;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #3498db;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .contact-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.25rem 0;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .skills-grid,
+            .project-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .reflection-text {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+            font-style: italic;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .reflection-text::before {
+            content: '"';
+            font-size: 4rem;
+            color: #3498db;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            opacity: 0.3;
+        }
+
+        .achievement-item {
+            background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateX(10px);
+        }
+
+        .resume-section {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(100px);
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            background: #2980b9;
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="profile-img"> <img src="sunjayy.jpg"> </div>
+            <h1>Sunjayy Madev P</h1>
+            <p class="subtitle">Student | DL Enthusiast</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#personal">Personal Info</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#reflections">Reflections</a></li>
+               
+                <li><a href="#extracurricular">Activities</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <section id="personal">
+                <h2>Personal Information</h2>
+                <div class="card">
+                    <h3>About Me</h3>
+                    <p>Hi! I'm Sunjay, a 19-year-old engineering student who loves artificial intelligence and computer vision. I find it exciting how computers can learn to "see" and understand images just like humans do. This field has huge potential to change how technology works in our daily lives.
+I'm also a basketball player on my college team. Playing basketball has taught me important skills like teamwork, quick thinking, and never giving up when things get tough. These lessons help me a lot in my studies and coding projects too.
+</p>
+                    <p><strong>Location:</strong> Bengaluru, India</p>
+                    <p><strong>Languages:</strong> English, Tamil, Kannada,Hindi</p>
+                    <p><strong>Interests:</strong> Computer Vision ,  Deep Learning , Coding , Basketball</p>
+                </div>
+            </section>
+
+            <section id="education">
+                <h2>Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h3>Current Degree Program</h3>
+                            <p><strong>IIIT SRI CITY</strong> | Expected Graduation: 2027</p>
+                            <p>Degree: B-Tech in AI & DS</p>
+                            <p>GPA: 8.5</p>
+                           
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h3>High School</h3>
+                            <p><strong>Narayana Olympiad School</strong> | Graduated: 2023</p>
+                            <p>Secured top 1% in JEE Advanced Examination</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h3>Certifications & Additional Learning</h3>
+                            
+                            <ul>
+                            <li>Supervised Learning (Coursera) </li>
+                            <li> Advanced Algorithms and Neural Networks (Coursera)</li>
+                            <li> Unsupervised Learning and Reinforcement Learning (Coursera)</li>
+                            <li> Deep Neural Netwroks (Coursera)</li>
+                            <li> Hyperparameter Tuning and Model Deployment (Coursera)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <h3>Technical Skills</h3>
+                        <p>C,Java,Python,SQL,Tensorflow,PyTorch,</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Soft Skills</h3>
+                        <p>Communication,Problem-solving,Teamwork</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Languages</h3>
+                        <p>English,Tamil,Kannada,Hindi/p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Industry Knowledge</h3>
+                        <p>Computer Vision and Deep Learning</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="experience">
+                <h2>Work Experience & Projects</h2>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <div class="project-image">💼</div>
+                        <div class="project-content">
+                            <h3>Job Title / Internship</h3>
+                            <p><strong>SandLogic</strong> | May 2025 - July 2025</p>
+                            <p>AI Developer, Developed Various models for computer vision tasks such as object tracking and image segmentation</p>
+                           
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">🚀</div>
+                        <div class="project-content">
+                            <h3>Object Tracking</h3>
+                            <p><strong>Personal Project</strong> | June 2025 </p> 
+                            <p>Created a deep learning model to Track objects. Used Yolo v11m model for image classification and BYTE-Track for tracking the object</p>
+                         
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">🔬</div>
+                        <div class="project-content">
+                            <h3>Landmark Detection</h3>
+                            <p><strong>Personal Project</strong> | August 2025</p>
+                            <p>Created a Deep Learning model to detect landmarks using Tensorflow with google landmarks dataset</p>
+                          
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="achievements">
+                <h2>Achievements & Awards</h2>
+                <div class="achievement-item">
+                    <h3>🏆 Inter Houses Basketball Tournament Winner</h3>
+                    <p><strong>IIIT SRI CITY</strong> | 2024</p>
+                    <p>Brief description of the achievement and its significance.</p>
+                </div>
+              
+                <div class="achievement-item">
+                    <h3>🌟 Personal Achievement</h3>
+                    
+                    <p>Cleared Jee Mains and Advanced, made the basketball Team in 1st year of college, succesfully obtained Internship. Maintained GPA above 8.5.</p>
+                </div>
+            </section>
+
+            <section id="reflections">
+                <h2>Reflections & Personal Statement</h2>
+                <div class="reflection-text">
+                    Clearing JEE Mains was a big achievement for me. It took years of hard work and study, but it taught me that I can reach any goal if I work hard enough and stay focused.
+Basketball has been just as important in shaping who I am. On the court, I learned that winning isn't just about being good individually – you need to work as a team, understand your opponents, and make quick decisions. These same skills help me when I'm working on AI projects or solving coding problems.
+What excites me most is combining my love for basketball with technology. I want to create AI systems that can analyze how players move, help coaches make better decisions, or even predict game results. This is where my two biggest interests come together.
+Learning AI is like learning basketball – you start with the basics and build up step by step. Every new concept connects to what you learned before. When I face difficult problems, whether in coding or on the court, I use the same approach: understand the problem, practice a lot, learn from mistakes, and keep improving.
+My goal is to work on computer vision research that can make a real difference. Maybe I'll help build better self-driving cars, create smarter security systems, or develop AI that can understand images as well as humans do.
+The discipline from basketball and the problem-solving skills from preparing for JEE have made me who I am today. I believe the best innovations come from people who can think across different areas, and my background in both sports and technology gives me a unique way to approach AI problems.
+                </div>
+            </section>
+
+
+
+            <section id="extracurricular">
+                <h2>Extracurricular & Volunteering</h2>
+                <div class="card">
+                    <h3>🎭 Student Organizations</h3>
+                    <p><strong>NexSync</strong> | Member | 2025 - Present</p>
+                
+                </div>
+               
+                <div class="card">
+                    <h3>🏃‍♀️ Sports & Activities</h3>
+                    <p><strong>Basketball</strong> | Captain | August 2025 - Present</p>
+                    <p>Participated in inter IIIT Sports meet 2025, Sanyog 2024 and Inter House event in 2024</p>
+                </div>
+            </section>
+
+            <section id="resume">
+                <h2>Resume & References</h2>
+                <div class="resume-section">
+                    <h3>📄 Download My Resume</h3>
+                    <p>Get a comprehensive overview of my qualifications and experience</p>
+                    <a href="Resume.pdf" class="btn">Download PDF Resume</a>
+                    
+                    
+                    
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2>Contact & Links</h2>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <h3>📧 Email</h3>
+                        <p>sunjayymadev06@gmail.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>📱 Phone</h3>
+                        <p>9443887898</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>💼 LinkedIn</h3>
+                        <p>linkedin.com/in/sunjayy-madev-p-6</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>💻 GitHub</h3>
+                        <p>github.com/Sunjayy06</p>
+                    </div>
+                    
+                    
+
+                    <div class="contact-item">
+                        <h3>📍 Location</h3>
+                        <p>Bengaluru, India</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Your Name. All rights reserved. | Designed with passion and purpose</p>
+        </footer>
+    </div>
+
+    <div class="scroll-to-top" id="scrollToTop">↑</div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll to top functionality
+        const scrollToTop = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTop.classList.add('visible');
+            } else {
+                scrollToTop.classList.remove('visible');
+            }
+        });
+
+        scrollToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add active navigation highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.background = '';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.background = 'rgba(255, 255, 255, 0.2)';
+                }
+            });
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.card, .skill-item, .project-card, .contact-item').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add typing effect to the subtitle
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect when page loads
+        window.addEventListener('load', () => {
+            const subtitle = document.querySelector('.subtitle');
+            const originalText = subtitle.textContent;
+            typeWriter(subtitle, originalText, 50);
+        });
+    </script>
+</body>
+</html>
